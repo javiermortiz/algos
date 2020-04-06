@@ -27,12 +27,12 @@ function recursiveDigitalRoot(num) {
     return recursiveDigitalRoot((num % 10) + (Math.floor(num / 10)));
 }
 
-console.log(digitalRoot(5));
-console.log(digitalRoot(11));
-console.log(digitalRoot(2525));
-console.log(recursiveDigitalRoot(5));
-console.log(recursiveDigitalRoot(11));
-console.log(recursiveDigitalRoot(2525));
+// console.log(digitalRoot(5));
+// console.log(digitalRoot(11));
+// console.log(digitalRoot(2525));
+// console.log(recursiveDigitalRoot(5));
+// console.log(recursiveDigitalRoot(11));
+// console.log(recursiveDigitalRoot(2525));
 
 
 
@@ -58,5 +58,69 @@ function ceasarCipher(message, increment) {
     return newMessage;
 }
 
-console.log(ceasarCipher("abc def", 2));
-console.log(ceasarCipher("xyz", 1));
+// console.log(ceasarCipher("abc def", 2));
+// console.log(ceasarCipher("xyz", 1));
+
+
+//Write a function, longest_common_substring(str1, str2) that takes two strings and returns the longest common substring. 
+//A substring is defined as any consecutive slice of letters from another string.
+// Bonus: solve it in O(m * n) using O(m * n) extra space. 
+//(Hint: the solution involves dynamic programming which will be introduced later in the course.)
+
+function longest_common_substring(str1, str2) {
+    let longest = "";
+
+    for (let i = 0; i < str1.length - 1; i++) {
+
+        for (let j = i + 1; j < str1.length; j++) {
+
+            let sub = str1.slice(i, j);
+            if (str2.includes(sub) && sub.length > longest.length) longest = sub;
+        }
+    }
+
+    return longest;
+}
+
+// console.log(longest_common_substring("abbcd", "dcbba"));
+// console.log(longest_common_substring("abbcatd", "dcatbba"));
+
+function makeMatrix(str1, str2) {
+    let matrix = Array(str1.length + 1).fill(0).map(slot => Array(str2.length + 1).fill(0));
+    str1.split('').forEach((el1, idx1) => {
+        str2.split('').forEach((el2, idx2) => {
+            if (el1 === el2) {
+                matrix[idx1 + 1][idx2 + 1] = matrix[idx1][idx2] + 1;
+            } else {
+                matrix[idx1][idx2] = 0;
+            }
+        })
+    })
+    return matrix;
+}
+
+function longestCommonSub(str1, str2) {
+    let matrix = makeMatrix(str1, str2);
+    let longest = "";
+
+    matrix.forEach((row, idx1) => {
+        row.forEach((length, idx2) => {
+            if (length > longest.length) {
+                longest = str1.slice(idx2 - length, idx2);
+            }
+        })
+    })
+
+    return longest;
+}
+
+console.log(longestCommonSub("cat", "rat"));
+console.log(longestCommonSub("tutorial", "tutorialrogramming"));
+
+//Write a function that takes an array of integers and returns their sum. Use recursion.
+function sumRec(arr) {
+    if (arr.length === 0) return 0;
+    return arr[0] + sumRec(arr.slice(1));
+}
+
+console.log(sumRec([0,1,2]));
