@@ -123,4 +123,50 @@ function sumRec(arr) {
     return arr[0] + sumRec(arr.slice(1));
 }
 
-console.log(sumRec([0,1,2]));
+// console.log(sumRec([0,1,2]));
+
+// Write a function, fibs(num) which returns the first n elements from the fibonnacci sequence, given n.
+// Solve it both iteratively and recursively.
+
+function fibs(num) {
+    if (num === 0) return [ ];
+    if (num === 1) return [ 0 ];
+    if (num === 2) return [ 0, 1];
+    let result = [ 0, 1];
+
+    while (result.length < num) {
+        let nextFibo = result[result.length - 1] + result[result.length - 2];
+        result.push(nextFibo);
+    }
+
+    return result;
+}
+
+console.log(fibs(5));
+
+function recursiveFibs(num) {
+    if (num === 0) return [];
+    if (num === 1) return [0];
+    if (num === 2) return [0, 1];
+
+    let nextFibo = recursiveFibs(num - 1) + recursiveFibs(num - 2);
+    return recursiveFibx(num - 1).push(nextFibo);
+}
+
+console.log(fibs(5));
+
+
+// Write a JavaScript function that takes a string and returns true if it's a palindrome, false if it's not. Use JavaScript.
+
+// This solution takes less time and memory than rebuilding the string backward and comparing the two.
+
+function palindrome(str) {
+    for (let i = 0; i < str.length; i++) {
+        if (str[i] !== str[str.length - i - 1]) return false;
+    }
+
+    return true;
+}
+
+console.log(palindrome("abba"));
+console.log(palindrome("dog"));
